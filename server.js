@@ -6,7 +6,6 @@
 	var stellar = require('stellar-sdk');
 	var express = require('express');
 	var bodyParser = require('body-parser');
-	var serverEvent = require('server-event');
 	var redis = require('redis');
 	var Promise = require("bluebird");
 
@@ -275,24 +274,43 @@
 
 	//
 
+	var serverEvent = function (res) {
+		res.writeHead(200, {
+			'Content-Type': 'text/event-stream',
+			'Cache-Control': 'no-cache',
+			'Connection': 'keep-alive'
+		});
+		res.write('\n');
+
+		return {
+			send: function(name, data, id) {
+				res.write('event: ' + name + '\n');
+				if (id) {
+					res.write('id: ' + id + '\n');
+				}
+				res.write('data: ' + JSON.stringify(data) + '\n\n');
+			}
+		};
+	};
+
+	//
+
 	var app = express();
 	app.use(bodyParser.json());
-	serverEvent = serverEvent({
-		express: app
-	});
 
-	app.get('/events/:address', serverEvent, function (req, res) {
+	app.get('/events/:address', function (req, res) {
 		var address = req.params.address;
 
 		var clientSub = redis.createClient();
 		clientSub.select(5);
 
+		var sse = serverEvent(res);
 		clientSub.on('message', function (channel, message) {
 			message = JSON.parse(message);
 			var command = message.command;
 			delete message.command;
 
-			res.sse(command, message);
+			sse.send(command, message);
 		});
 
 		req.on('close', function () {

@@ -10,7 +10,6 @@
     "eventsource": "^0.1.6",
     "express": "^4.13.3",
     "redis": "^2.0.1",
-    "server-event": "^1.0.1",
     "stellar-sdk": "^0.2.11"
   },
   "devDependencies": {},
