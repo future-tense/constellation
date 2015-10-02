@@ -1,0 +1,31 @@
+{
+  "name": "constellation",
+  "version": "0.0.1",
+  "description": "",
+  "main": "constellation.js",
+  "dependencies": {
+    "axios": "^0.7.0",
+    "bluebird": "^2.10.2",
+    "body-parser": "^1.14.1",
+    "eventsource": "^0.1.6",
+    "express": "^4.13.3",
+    "redis": "^2.0.1",
+    "server-event": "^1.0.1",
+    "stellar-sdk": "^0.2.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./server.development.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johansten/constellation.git"
+  },
+  "author": "Johan Stén",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johansten/constellation/issues"
+  },
+  "homepage": "https://github.com/johansten/constellation#readme"
+}
