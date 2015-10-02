@@ -10,3 +10,6 @@ so you don't have to.
 
 For now, the server listens to commands in regular HTTP, and uses
 Server Sent Events to send push notifications to interested users.
+
+*Disclaimer: Imagine something that is as far away as possible from a finished product.
+Now imagine something twice as far away. That's the neighbourhood you're in. Here be dragons.*
