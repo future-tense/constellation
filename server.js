@@ -302,7 +302,7 @@
 		var address = req.params.address;
 
 		var clientSub = redis.createClient();
-		clientSub.select(5);
+		clientSub.select(process.env.REDIS_DB);
 
 		var sse = serverEvent(res);
 		clientSub.on('message', function (channel, message) {
